@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <title>Listagem de Turmas</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+</head>
+<body>
+
+<div class="container mt-5">
+    <h2>Listagem de Turmas</h2>
+    <table class="table">
+        <thead>
+        <tr>
+            <th>ID</th>
+            <th>Curso</th>
+            <th>Data de Início</th>
+            <th>Data de Fim</th>
+            <th>Vagas Disponíveis</th>
+        </tr>
+        </thead>
+        <tbody>
+        <!-- Preencha dinamicamente com dados do backend usando Thymeleaf -->
+        <tr th:each="turma : ${turmas}">
+            <td th:text="${turma.id}"></td>
+            <td th:text="${turma.curso.nome}"></td>
+            <td th:text="${turma.inicioMatriculas}"></td>
+            <td th:text="${turma.fimMatriculas}"></td>
+            <td th:text="${turma.vagasDisponiveis}"></td>
+        </tr>
+        </tbody>
+    </table>
+</div>
+
+<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.0.8/dist/umd/popper.min.js"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+</body>
+</html>

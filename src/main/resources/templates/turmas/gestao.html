@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Gestão de Turmas</title>
+
+    <!-- Adicione os links do Bootstrap -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+</head>
+<body class="bg-light">
+<div class="container mt-4">
+    <h2>Gestão de Turmas</h2>
+
+    <!-- Lista de Turmas -->
+    <div class="row mt-4">
+        <div class="col-md-6">
+            <h3>Turmas</h3>
+            <ul class="list-group">
+                <!-- Loop para exibir informações sobre cada turma -->
+                <li th:each="turma : ${turmas}" class="list-group-item">
+                    <p>
+                        Nome do Curso: <span th:text="${turma.curso.nome}" class="font-weight-bold"></span><br>
+                        Vagas Disponíveis: <span th:text="${turma.vagasDisponiveis}" class="font-weight-bold"></span>
+                    </p>
+                    <!-- Formulário para adicionar alunos à turma -->
+                    <form action="/turmaCurso/adicionarEstudantes" method="get">
+                        <div class="form-group">
+                            <label for="turmaId">Selecione a Turma:</label>
+                            <select name="turmaId" class="form-control">
+                                <option th:each="t : ${turmas}" th:value="${t.id}" th:text="${t.curso.nome}"></option>
+                            </select>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="estudantesId">Selecione Estudantes:</label>
+                            <select name="estudantesId" class="form-control" multiple>
+                                <!-- Loop para exibir estudantes disponíveis -->
+                                <option th:each="estudante : ${estudantes}"
+                                        th:value="${estudante.id}"
+                                        th:text="${estudante.nome}"></option>
+                            </select>
+                        </div>
+
+                        <button type="submit" class="btn btn-success">Adicionar Estudantes</button>
+                    </form>
+                </li>
+            </ul>
+        </div>
+    </div>
+
+    <!-- Lista de Estudantes -->
+    <div class="row mt-4">
+        <div class="col-md-6">
+            <h3>Estudantes</h3>
+            <ul class="list-group">
+                <li th:each="estudante : ${estudantes}" class="list-group-item">
+                    <span th:text="${estudante.nome}"></span>
+                </li>
+            </ul>
+        </div>
+    </div>
+</div>
+</body>
+</html>
